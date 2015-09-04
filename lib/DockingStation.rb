@@ -12,6 +12,7 @@ class DockingStation
   end
 
   def release_bike
+    fail "No bikes available" if !one_good_bike
     fail "No bikes available" if empty?
     bikes.pop
   end
@@ -21,6 +22,10 @@ class DockingStation
     fail 'Docking station full' if full?
     bikes << bike
 
+  end
+
+  def one_good_bike
+    @bikes.any? {|bike| bike.working?}
   end
 
   private
